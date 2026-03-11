@@ -22,7 +22,7 @@ export function PuzzleGrid({ categories, gridState, onCellClick }: PuzzleGridPro
   // Calculate grid template columns
   // Add a column for row category labels + row item labels + grid columns
   const columnTemplate = `auto auto ${categories.slice(1).map(cat =>
-    `repeat(${cat.items.length}, 40px)`
+    `repeat(${cat.items.length}, var(--cell-size))`
   ).join(' ')}`;
 
   return (

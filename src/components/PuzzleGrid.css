@@ -5,6 +5,7 @@
 .puzzle-grid-container {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: var(--spacing-xl);
   background: var(--color-surface);
   padding: var(--spacing-lg);
@@ -93,6 +94,9 @@
 .grid-cell-label.row-label {
   background: var(--color-surface-elevated);
   font-weight: var(--font-weight-bold);
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .grid-cell-label.col-header {
@@ -227,9 +231,6 @@
 @media (max-width: 480px) {
   .puzzle-grid-container {
     border-radius: var(--border-radius);
-    margin: 0 calc(var(--spacing-sm) * -1);
-    border-left: none;
-    border-right: none;
   }
 
   .category-name-label,
@@ -240,6 +241,10 @@
   .grid-cell-label {
     font-size: 0.7rem;
     padding: 0 0.25rem;
+  }
+
+  .grid-cell-label.row-label {
+    max-width: 80px;
   }
 
   .grid-cell-label.col-header {

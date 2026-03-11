@@ -231,6 +231,10 @@ main {
   align-items: start;
 }
 
+.grid-area {
+  min-width: 0;
+}
+
 /* ========================================
    RESPONSIVE
    ======================================== */
@@ -275,13 +279,8 @@ main {
     padding: var(--spacing-md);
   }
 
-  .difficulty-selector {
-    flex-wrap: wrap;
-  }
-
   .difficulty-button {
     flex: 1;
-    min-width: calc(50% - 0.25rem);
   }
 
   .action-buttons {
