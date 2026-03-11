@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <!-- Background -->
+  <rect width="32" height="32" rx="4" fill="#646cff"/>
+
+  <!-- Grid lines -->
+  <g stroke="white" stroke-width="1.5" stroke-linecap="round">
+    <!-- Vertical lines -->
+    <line x1="12" y1="8" x2="12" y2="24"/>
+    <line x1="20" y1="8" x2="20" y2="24"/>
+
+    <!-- Horizontal lines -->
+    <line x1="8" y1="12" x2="24" y2="12"/>
+    <line x1="8" y1="20" x2="24" y2="20"/>
+  </g>
+
+  <!-- Border -->
+  <rect x="8" y="8" width="16" height="16" stroke="white" stroke-width="2" fill="none" rx="1"/>
+
+  <!-- Checkmark -->
+  <path d="M 10 14 L 13 17 L 18 11" stroke="#90ee90" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+  <!-- X mark -->
+  <g stroke="#ff9999" stroke-width="2" stroke-linecap="round">
+    <line x1="19" y1="19" x2="21" y2="21"/>
+    <line x1="21" y1="19" x2="19" y2="21"/>
+  </g>
+</svg>

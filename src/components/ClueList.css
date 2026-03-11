@@ -1,0 +1,69 @@
+.clue-list {
+  background: var(--color-surface);
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius-lg);
+  border: var(--border-width) solid var(--color-border-light);
+}
+
+.clue-list h2 {
+  margin-top: 0;
+  margin-bottom: var(--spacing-md);
+  font-size: 1.5rem;
+}
+
+.clue-list ol {
+  margin: 0;
+  padding-left: var(--spacing-lg);
+}
+
+.clue-item {
+  margin-bottom: 0.75rem;
+  line-height: 1.5;
+}
+
+.clue-item:last-child {
+  margin-bottom: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .clue-list {
+    padding: var(--spacing-md);
+  }
+
+  .clue-list h2 {
+    font-size: 1.25rem;
+  }
+
+  .clue-item {
+    font-size: 0.875rem;
+    margin-bottom: var(--spacing-sm);
+  }
+}
+
+@media (max-width: 480px) {
+  .clue-list {
+    padding: var(--spacing-sm);
+    border-radius: var(--border-radius);
+  }
+
+  .clue-list h2 {
+    font-size: 1.125rem;
+  }
+
+  .clue-list ol {
+    padding-left: var(--spacing-md);
+  }
+
+  .clue-item {
+    font-size: 0.8125rem;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .clue-list {
+    background: var(--color-surface);
+    border-color: var(--color-border-light);
+  }
+}

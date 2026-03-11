@@ -1,0 +1,126 @@
+.grid-cell {
+  min-width: var(--cell-size);
+  width: var(--cell-size);
+  height: var(--cell-size);
+  border: none;
+  border-radius: 0;
+  background: white;
+  cursor: pointer;
+  font-size: 1.25rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-normal);
+  padding: 0;
+  box-sizing: border-box;
+  /* Better touch support */
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.grid-cell:hover {
+  background: #f0f0f0;
+}
+
+.grid-cell:active {
+  transform: scale(0.95);
+}
+
+.grid-cell-yes {
+  background: #d4edda;
+  color: #155724;
+}
+
+.grid-cell-yes:hover {
+  background: #c3e6cb;
+}
+
+.grid-cell-no {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.grid-cell-no:hover {
+  background: #f5c6cb;
+}
+
+.grid-cell-unknown {
+  background: white;
+  color: transparent;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .grid-cell {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .grid-cell {
+    font-size: 0.875rem;
+  }
+
+  /* Reduce hover effect on mobile (touch devices) */
+  .grid-cell:hover {
+    background: white;
+  }
+
+  .grid-cell-yes:hover {
+    background: #d4edda;
+  }
+
+  .grid-cell-no:hover {
+    background: #f8d7da;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .grid-cell {
+    background: #1a1a1a;
+    color: #e0e0e0;
+  }
+
+  .grid-cell:hover {
+    background: #2a2a2a;
+  }
+
+  .grid-cell-yes {
+    background: #1a4d2e;
+    color: #90ee90;
+  }
+
+  .grid-cell-yes:hover {
+    background: #255d3a;
+  }
+
+  .grid-cell-no {
+    background: #4d1a1a;
+    color: #ff9999;
+  }
+
+  .grid-cell-no:hover {
+    background: #5d2525;
+  }
+
+  .grid-cell-unknown {
+    background: #1a1a1a;
+  }
+
+  /* Dark mode mobile overrides */
+  @media (max-width: 480px) {
+    .grid-cell:hover {
+      background: #1a1a1a;
+    }
+
+    .grid-cell-yes:hover {
+      background: #1a4d2e;
+    }
+
+    .grid-cell-no:hover {
+      background: #4d1a1a;
+    }
+  }
+}
