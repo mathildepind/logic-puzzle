@@ -1,73 +1,50 @@
-# React + TypeScript + Vite
+# Logic Grid Puzzle App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A browser-based logic grid puzzle game built with React and TypeScript. Solve classic deduction puzzles or generate new ones on demand.
 
-Currently, two official plugins are available:
+## What it does
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Players are given a set of categories (e.g. People, Departments, Beverages) and a list of clues. The goal is to use logical deduction to determine the unique relationship between every item across all categories by filling in the grid.
 
-## React Compiler
+**Gameplay**
+- Click cells to cycle through states: empty → yes → no
+- Use the clues panel to work through the puzzle step by step
+- Check your solution at any time — the app reports how many cells are incorrect
+- Reset the grid to start over
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+**Preset puzzles**
+- Three hand-crafted puzzles at Easy, Medium, and Hard difficulty
 
-## Expanding the ESLint configuration
+**Puzzle generator**
+- Generates a new 3-category, 5-item puzzle with ~10 clues in under a second
+- Draws from 8 themed content libraries (Office Workers, Pet Adoption, Restaurant Night, Sports Team, Concert Night, and more)
+- Clues come in three types: direct assignments, indirect links between categories, and negative constraints
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Tech stack
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- React 19 + TypeScript
+- Vite
+- Vitest for unit and integration tests
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Getting started
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Run tests:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+npm test
+```
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Project structure
+
+```
+src/
+  components/     # PuzzleGrid, ClueList, PuzzleInfo, Modal, GridCell
+  data/           # Preset puzzles and puzzle theme definitions
+  types/          # TypeScript interfaces for puzzles and grid state
+  utils/          # Grid logic, puzzle generator, clue generator, validation
 ```
