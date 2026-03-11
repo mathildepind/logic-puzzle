@@ -26,18 +26,18 @@
 }
 
 .difficulty-easy {
-  background: #d4edda;
-  color: #155724;
+  background: #daeaf4;
+  color: #2a5275;
 }
 
 .difficulty-medium {
-  background: #fff3cd;
-  color: #856404;
+  background: #fde8c0;
+  color: #7a5010;
 }
 
 .difficulty-hard {
-  background: #f8d7da;
-  color: #721c24;
+  background: #fde0cc;
+  color: #8b3a1a;
 }
 
 .puzzle-description {
@@ -48,8 +48,8 @@
 .completion-message {
   margin-top: 1rem;
   padding: 1rem;
-  background: #d4edda;
-  color: #155724;
+  background: #F6AE2D;
+  color: #2F4858;
   border-radius: 4px;
   font-weight: 600;
   text-align: center;
@@ -102,26 +102,26 @@
 /* Dark mode support */
 @media (prefers-color-scheme: dark) {
   .difficulty-easy {
-    background: #1a4d2e;
-    color: #90ee90;
+    background: #2a4a5e;
+    color: #86BBD8;
   }
 
   .difficulty-medium {
-    background: #4d4d1a;
-    color: #ffee90;
+    background: #4a3510;
+    color: #F6AE2D;
   }
 
   .difficulty-hard {
-    background: #4d1a1a;
-    color: #ff9999;
+    background: #3d2010;
+    color: #f4a07a;
   }
 
   .puzzle-description {
-    color: #aaa;
+    color: #86BBD8;
   }
 
   .completion-message {
-    background: #1a4d2e;
-    color: #90ee90;
+    background: #F6AE2D;
+    color: #2F4858;
   }
 }

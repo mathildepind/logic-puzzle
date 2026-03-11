@@ -4,7 +4,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(47, 72, 88, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -29,7 +29,7 @@
   width: 90%;
   max-height: 90vh;
   overflow: auto;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 20px rgba(47, 72, 88, 0.3);
   animation: slideIn 0.3s ease-out;
 }
 
@@ -49,12 +49,13 @@
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #c0dcea;
 }
 
 .modal-header h2 {
   margin: 0;
   font-size: 1.5rem;
+  color: #2F4858;
 }
 
 .modal-close {
@@ -62,7 +63,7 @@
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
-  color: #666;
+  color: #5a8aa8;
   padding: 0;
   width: 2rem;
   height: 2rem;
@@ -74,8 +75,8 @@
 }
 
 .modal-close:hover {
-  background: #f0f0f0;
-  color: #333;
+  background: #daeaf4;
+  color: #2F4858;
 }
 
 .modal-body {
@@ -84,14 +85,14 @@
 
 .modal-footer {
   padding: 1rem 1.5rem;
-  border-top: 1px solid #ddd;
+  border-top: 1px solid #c0dcea;
   display: flex;
   justify-content: flex-end;
 }
 
 .modal-button {
   padding: 0.75rem 1.5rem;
-  background: #646cff;
+  background: #F26419;
   color: white;
   border: none;
   border-radius: 6px;
@@ -102,12 +103,12 @@
 }
 
 .modal-button:hover {
-  background: #535bf2;
+  background: #d4541a;
 }
 
 .result-success {
-  color: #155724;
-  background: #d4edda;
+  color: #2a5275;
+  background: #daeaf4;
   padding: 1rem;
   border-radius: 4px;
   margin-bottom: 1rem;
@@ -115,8 +116,8 @@
 }
 
 .result-error {
-  color: #721c24;
-  background: #f8d7da;
+  color: #8b3a1a;
+  background: #fde0cc;
   padding: 1rem;
   border-radius: 4px;
   margin-bottom: 1rem;
@@ -124,8 +125,8 @@
 }
 
 .result-warning {
-  color: #856404;
-  background: #fff3cd;
+  color: #7a5010;
+  background: #fde8c0;
   padding: 1rem;
   border-radius: 4px;
   margin-bottom: 1rem;
@@ -133,61 +134,61 @@
 }
 
 .result-details {
-  color: #666;
+  color: #5a8aa8;
   line-height: 1.6;
 }
 
 /* Dark mode support */
 @media (prefers-color-scheme: dark) {
   .modal-content {
-    background: #1a1a1a;
+    background: #1e3545;
   }
 
   .modal-header {
-    border-bottom-color: #444;
+    border-bottom-color: #2a4a5e;
   }
 
   .modal-header h2 {
-    color: #ddd;
+    color: #f0f4f8;
   }
 
   .modal-close {
-    color: #aaa;
+    color: #86BBD8;
   }
 
   .modal-close:hover {
-    background: #333;
-    color: #ddd;
+    background: #2a4a5e;
+    color: #f0f4f8;
   }
 
   .modal-footer {
-    border-top-color: #444;
+    border-top-color: #2a4a5e;
   }
 
   .modal-button {
-    background: #535bf2;
+    background: #F26419;
   }
 
   .modal-button:hover {
-    background: #646cff;
+    background: #d4541a;
   }
 
   .result-success {
-    background: #1a4d2e;
-    color: #90ee90;
+    background: #2a4a5e;
+    color: #86BBD8;
   }
 
   .result-error {
-    background: #4d1a1a;
-    color: #ff9999;
+    background: #3d2010;
+    color: #f4a07a;
   }
 
   .result-warning {
-    background: #4d4d1a;
-    color: #ffee90;
+    background: #4a3510;
+    color: #F6AE2D;
   }
 
   .result-details {
-    color: #aaa;
+    color: #86BBD8;
   }
 }

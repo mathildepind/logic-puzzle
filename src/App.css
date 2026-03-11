@@ -3,26 +3,35 @@
    ======================================== */
 
 :root {
-  /* Colors - Primary */
-  --color-primary: #646cff;
-  --color-primary-hover: #535bf2;
-  --color-success: #10b981;
-  --color-success-hover: #059669;
+  /* Colors - Primary (Baltic Blue) */
+  --color-primary: #33658A;
+  --color-primary-hover: #2a5275;
+
+  /* Colors - Action (Blaze Orange) */
+  --color-action: #F26419;
+  --color-action-hover: #d4541a;
+
+  /* Colors - Highlight (Honey Bronze) */
+  --color-highlight: #F6AE2D;
+  --color-highlight-hover: #e09c20;
 
   /* Colors - Surfaces */
-  --color-surface: white;
-  --color-surface-elevated: #f0f0f0;
-  --color-surface-hover: #e0e0e0;
+  --color-surface: #ffffff;
+  --color-surface-elevated: #daeaf4;
+  --color-surface-hover: #c0dcea;
 
   /* Colors - Borders */
-  --color-border: #ccc;
-  --color-border-light: #ddd;
-  --color-border-dark: #999;
+  --color-border: #86BBD8;
+  --color-border-light: #c0dcea;
+  --color-border-dark: #33658A;
 
   /* Colors - Text */
-  --color-text: #333;
-  --color-text-secondary: #555;
-  --color-text-muted: #777;
+  --color-text: #2F4858;
+  --color-text-secondary: #33658A;
+  --color-text-muted: #5a8aa8;
+
+  /* Colors - Section borders in grid */
+  --color-section-border: #2F4858;
 
   /* Spacing */
   --spacing-xs: 0.25rem;
@@ -64,26 +73,27 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    /* Colors - Primary (slightly adjusted for dark mode) */
-    --color-primary: #535bf2;
-    --color-primary-hover: #646cff;
-    --color-success: #059669;
-    --color-success-hover: #10b981;
+    /* Colors - Primary */
+    --color-primary: #86BBD8;
+    --color-primary-hover: #6aaac9;
 
     /* Colors - Surfaces */
-    --color-surface: #1a1a1a;
-    --color-surface-elevated: #2a2a2a;
-    --color-surface-hover: #333;
+    --color-surface: #1e3545;
+    --color-surface-elevated: #2a4a5e;
+    --color-surface-hover: #335a72;
 
     /* Colors - Borders */
-    --color-border: #555;
-    --color-border-light: #444;
-    --color-border-dark: #666;
+    --color-border: #33658A;
+    --color-border-light: #2a4a5e;
+    --color-border-dark: #86BBD8;
 
     /* Colors - Text */
-    --color-text: #e0e0e0;
-    --color-text-secondary: #ccc;
-    --color-text-muted: #999;
+    --color-text: #f0f4f8;
+    --color-text-secondary: #86BBD8;
+    --color-text-muted: #5a8aa8;
+
+    /* Colors - Section borders in grid */
+    --color-section-border: #86BBD8;
   }
 }
 
@@ -99,7 +109,7 @@
 }
 
 header {
-  border-bottom: var(--border-width) solid var(--color-border);
+  background: #2F4858;
 }
 
 header h1 {
@@ -110,6 +120,7 @@ header h1 {
   margin-right: auto;
   text-align: center;
   font-size: var(--font-size-lg);
+  color: #f0f4f8;
 }
 
 main {
@@ -191,22 +202,16 @@ main {
   white-space: nowrap;
 }
 
-.check-button {
-  background: var(--color-success);
-}
-
-.check-button:hover {
-  background: var(--color-success-hover);
-}
-
+.check-button,
 .reset-button,
 .generate-button {
-  background: var(--color-primary);
+  background: var(--color-action);
 }
 
+.check-button:hover,
 .reset-button:hover,
 .generate-button:hover {
-  background: var(--color-primary-hover);
+  background: var(--color-action-hover);
 }
 
 .generate-button:disabled {

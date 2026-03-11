@@ -28,21 +28,21 @@
 }
 
 .grid-cell-yes {
-  background: #d4edda;
-  color: #155724;
+  background: #F6AE2D;
+  color: #2F4858;
 }
 
 .grid-cell-yes:hover {
-  background: #c3e6cb;
+  background: #e09c20;
 }
 
 .grid-cell-no {
-  background: #f8d7da;
-  color: #721c24;
+  background: #fde8d8;
+  color: #8b3a1a;
 }
 
 .grid-cell-no:hover {
-  background: #f5c6cb;
+  background: #fbd5bb;
 }
 
 .grid-cell-unknown {
@@ -68,59 +68,59 @@
   }
 
   .grid-cell-yes:hover {
-    background: #d4edda;
+    background: #F6AE2D;
   }
 
   .grid-cell-no:hover {
-    background: #f8d7da;
+    background: #fde8d8;
   }
 }
 
 /* Dark mode support */
 @media (prefers-color-scheme: dark) {
   .grid-cell {
-    background: #1a1a1a;
-    color: #e0e0e0;
+    background: #1e3545;
+    color: #f0f4f8;
   }
 
   .grid-cell:hover {
-    background: #2a2a2a;
+    background: #2a4a5e;
   }
 
   .grid-cell-yes {
-    background: #1a4d2e;
-    color: #90ee90;
+    background: #F6AE2D;
+    color: #2F4858;
   }
 
   .grid-cell-yes:hover {
-    background: #255d3a;
+    background: #e09c20;
   }
 
   .grid-cell-no {
-    background: #4d1a1a;
-    color: #ff9999;
+    background: #3d2010;
+    color: #f4a07a;
   }
 
   .grid-cell-no:hover {
-    background: #5d2525;
+    background: #4d2a18;
   }
 
   .grid-cell-unknown {
-    background: #1a1a1a;
+    background: #1e3545;
   }
 
   /* Dark mode mobile overrides */
   @media (max-width: 480px) {
     .grid-cell:hover {
-      background: #1a1a1a;
+      background: #1e3545;
     }
 
     .grid-cell-yes:hover {
-      background: #1a4d2e;
+      background: #F6AE2D;
     }
 
     .grid-cell-no:hover {
-      background: #4d1a1a;
+      background: #3d2010;
     }
   }
 }
