@@ -51,13 +51,13 @@ export const PUZZLE_THEMES: PuzzleTheme[] = [
         name: 'Pets',
         items: ['Cat', 'Dog', 'Rabbit', 'Hamster', 'Parrot', 'Lizard', 'Turtle', 'Guinea Pig'],
         singularVerb: 'adopted',
-        pluralVerb: 'adopted'
+        pluralVerb: 'adopt'
       },
       {
         name: 'Accessories',
         items: ['Red Collar', 'Blue Leash', 'Yellow Toy', 'Green Bowl', 'Purple Bed', 'Orange Cage', 'Pink Brush', 'White Blanket'],
         singularVerb: 'chose',
-        pluralVerb: 'chose'
+        pluralVerb: 'choose'
       }
     ]
   },
@@ -75,7 +75,7 @@ export const PUZZLE_THEMES: PuzzleTheme[] = [
         name: 'Meals',
         items: ['Steak', 'Pasta', 'Fish', 'Burger', 'Salad', 'Pizza', 'Soup', 'Tacos'],
         singularVerb: 'ordered',
-        pluralVerb: 'ordered'
+        pluralVerb: 'order'
       },
       {
         name: 'Drinks',
@@ -171,13 +171,13 @@ export const PUZZLE_THEMES: PuzzleTheme[] = [
         name: 'Cities',
         items: ['Paris', 'Tokyo', 'London', 'Rome', 'Sydney', 'Dubai', 'Barcelona', 'Bangkok'],
         singularVerb: 'visited',
-        pluralVerb: 'visited'
+        pluralVerb: 'visit'
       },
       {
         name: 'Hotels',
         items: ['Grand Plaza', 'Ocean View', 'Mountain Lodge', 'City Center', 'Harbor Inn', 'Garden Suites', 'Skyline Tower', 'Riverside Manor'],
         singularVerb: 'stayed at',
-        pluralVerb: 'stayed at'
+        pluralVerb: 'stay at'
       }
     ]
   },

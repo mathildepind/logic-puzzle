@@ -1,4 +1,4 @@
-import type { CellState as CellStateType, GridState, LogicGridPuzzle, Relationship } from '../types/puzzle';
+import type { Category, CellState as CellStateType, GridState, LogicGridPuzzle, Relationship } from '../types/puzzle';
 import { CellState } from '../types/puzzle';
 
 /**
@@ -134,6 +134,43 @@ export function isPuzzleSolved(
   }
 
   return true;
+}
+
+/**
+ * When a cell is set to YES, marks all other cells in the same row and column
+ * of that sub-grid section as NO (only overwrites UNKNOWN cells).
+ */
+export function autoFillOnYes(
+  gridState: GridState,
+  categories: Category[],
+  categoryId1: string,
+  itemIndex1: number,
+  categoryId2: string,
+  itemIndex2: number
+): GridState {
+  let newState = gridState;
+
+  const cat1 = categories.find(c => c.id === categoryId1);
+  const cat2 = categories.find(c => c.id === categoryId2);
+  if (!cat1 || !cat2) return newState;
+
+  // Fill the rest of itemIndex1's row in this sub-grid (catId1:item1 vs all other catId2 items)
+  for (let j = 0; j < cat2.items.length; j++) {
+    if (j === itemIndex2) continue;
+    if (getCellState(newState, categoryId1, itemIndex1, categoryId2, j) === CellState.UNKNOWN) {
+      newState = setCellState(newState, categoryId1, itemIndex1, categoryId2, j, CellState.NO);
+    }
+  }
+
+  // Fill the rest of itemIndex2's column in this sub-grid (all other catId1 items vs catId2:item2)
+  for (let i = 0; i < cat1.items.length; i++) {
+    if (i === itemIndex1) continue;
+    if (getCellState(newState, categoryId1, i, categoryId2, itemIndex2) === CellState.UNKNOWN) {
+      newState = setCellState(newState, categoryId1, i, categoryId2, itemIndex2, CellState.NO);
+    }
+  }
+
+  return newState;
 }
 
 /**

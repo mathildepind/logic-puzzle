@@ -166,7 +166,9 @@ export function generateIndirectClues(
 
     // Generate clue text
     // Format: "The person who [verb2] [item2] [verb3] [item3]"
-    const singularCat1 = cat1.name.toLowerCase().replace(/s$/, '');
+    const irregularSingulars: Record<string, string> = { people: 'person' };
+    const lowerName = cat1.name.toLowerCase();
+    const singularCat1 = irregularSingulars[lowerName] ?? lowerName.replace(/s$/, '');
     const text = `The ${singularCat1} who ${verb2} ${cat2.items[itemIdx2]} ${verb3} ${cat3.items[itemIdx3]}.`;
 
     clues.push({

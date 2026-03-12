@@ -7,7 +7,7 @@ import { PuzzleInfo } from './components/PuzzleInfo';
 import { PuzzleGrid } from './components/PuzzleGrid';
 import { ClueList } from './components/ClueList';
 import { Modal } from './components/Modal';
-import { initializeGridState, getCellState, setCellState, cycleCellState, isPuzzleSolved, checkSolution } from './utils/gridHelpers';
+import { initializeGridState, getCellState, setCellState, cycleCellState, autoFillOnYes, isPuzzleSolved, checkSolution } from './utils/gridHelpers';
 import { generatePuzzle } from './utils/puzzleGenerator';
 import './App.css';
 
@@ -38,8 +38,12 @@ function App() {
     itemIndex2: number
   ) => {
     const currentState = getCellState(gridState, categoryId1, itemIndex1, categoryId2, itemIndex2);
-    const newState = cycleCellState(currentState);
-    setGridState(setCellState(gridState, categoryId1, itemIndex1, categoryId2, itemIndex2, newState));
+    const newCellState = cycleCellState(currentState);
+    let newGridState = setCellState(gridState, categoryId1, itemIndex1, categoryId2, itemIndex2, newCellState);
+    if (newCellState === 'yes') {
+      newGridState = autoFillOnYes(newGridState, currentPuzzle.categories, categoryId1, itemIndex1, categoryId2, itemIndex2);
+    }
+    setGridState(newGridState);
   };
 
   const handleReset = () => {
