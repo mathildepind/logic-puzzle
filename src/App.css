@@ -157,6 +157,56 @@ main {
 }
 
 /* ========================================
+   THEME PROMPT
+   ======================================== */
+
+.theme-prompt {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.theme-prompt-input {
+  width: 100%;
+  padding: 0.625rem var(--spacing-md);
+  border: var(--border-width-thick) solid var(--color-border);
+  border-radius: var(--border-radius);
+  font-size: var(--font-size-base);
+  font-family: inherit;
+  background: var(--color-surface);
+  color: var(--color-text);
+  transition: border-color var(--transition-normal);
+  box-sizing: border-box;
+}
+
+.theme-prompt-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.theme-prompt-input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.theme-prompt-input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.theme-prompt-error {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: #c0392b;
+}
+
+.theme-prompt-status {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+/* ========================================
    BUTTONS
    ======================================== */
 

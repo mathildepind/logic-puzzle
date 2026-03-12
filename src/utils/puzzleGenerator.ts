@@ -1,5 +1,6 @@
 import type { Category, LogicGridPuzzle, Relationship } from '../types/puzzle';
 import { selectRandomTheme, shuffle, type PuzzleTheme } from '../data/puzzleThemes';
+import type { Category } from '../types/puzzle';
 import { validatePuzzle } from './gridHelpers';
 import { generateClues } from './clueGenerator';
 
@@ -110,6 +111,18 @@ export function queryMatch(
  * @param options Generation options
  * @returns Complete logic grid puzzle
  */
+function resolveTheme(
+  theme: PuzzleTheme,
+  itemCount: number
+): { theme: PuzzleTheme; categories: Category[] } {
+  const categories: Category[] = theme.categories.map((cat, idx) => ({
+    id: `cat${idx}`,
+    name: cat.name,
+    items: shuffle(cat.items).slice(0, itemCount)
+  }));
+  return { theme, categories };
+}
+
 export function generatePuzzle(
   difficulty: 'easy' | 'medium' | 'hard' = 'medium',
   options?: {
@@ -117,6 +130,7 @@ export function generatePuzzle(
     itemCount?: number;
     clueCount?: number;
     maxAttempts?: number;
+    theme?: PuzzleTheme;
   }
 ): LogicGridPuzzle {
   const config = {
@@ -130,7 +144,9 @@ export function generatePuzzle(
   for (let attempt = 0; attempt < config.maxAttempts; attempt++) {
     try {
       // Step 1: Select theme and create categories
-      const { theme, categories } = selectRandomTheme(config.itemCount);
+      const { theme, categories } = config.theme
+        ? resolveTheme(config.theme, config.itemCount)
+        : selectRandomTheme(config.itemCount);
 
       // Ensure we have the right number of categories
       if (categories.length < config.categoryCount) {
