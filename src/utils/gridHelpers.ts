@@ -174,6 +174,41 @@ export function autoFillOnYes(
 }
 
 /**
+ * When a YES cell is toggled back to UNKNOWN, clears auto-filled NO cells
+ * in the same sub-grid row and column back to UNKNOWN.
+ */
+export function clearAutoFillOnUnyes(
+  gridState: GridState,
+  categories: Category[],
+  categoryId1: string,
+  itemIndex1: number,
+  categoryId2: string,
+  itemIndex2: number
+): GridState {
+  let newState = gridState;
+
+  const cat1 = categories.find(c => c.id === categoryId1);
+  const cat2 = categories.find(c => c.id === categoryId2);
+  if (!cat1 || !cat2) return newState;
+
+  for (let j = 0; j < cat2.items.length; j++) {
+    if (j === itemIndex2) continue;
+    if (getCellState(newState, categoryId1, itemIndex1, categoryId2, j) === CellState.NO) {
+      newState = setCellState(newState, categoryId1, itemIndex1, categoryId2, j, CellState.UNKNOWN);
+    }
+  }
+
+  for (let i = 0; i < cat1.items.length; i++) {
+    if (i === itemIndex1) continue;
+    if (getCellState(newState, categoryId1, i, categoryId2, itemIndex2) === CellState.NO) {
+      newState = setCellState(newState, categoryId1, i, categoryId2, itemIndex2, CellState.UNKNOWN);
+    }
+  }
+
+  return newState;
+}
+
+/**
  * Cycles through cell states: UNKNOWN -> YES -> NO -> UNKNOWN
  */
 export function cycleCellState(currentState: CellStateType): CellStateType {
