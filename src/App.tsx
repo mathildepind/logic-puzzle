@@ -9,6 +9,8 @@ import { ClueList } from './components/ClueList';
 import { Modal } from './components/Modal';
 import { initializeGridState, getCellState, setCellState, cycleCellState, autoFillOnYes, clearAutoFillOnUnyes, isPuzzleSolved, checkSolution } from './utils/gridHelpers';
 import { generatePuzzle } from './utils/puzzleGenerator';
+import { generateThemeFromPrompt } from './services/themeGenerator';
+import { validateUserPrompt } from './utils/themeValidator';
 import './App.css';
 
 function App() {
@@ -22,8 +24,10 @@ function App() {
     incorrectCount: number;
     totalCells: number;
   } | null>(null);
-  const [generatedPuzzles, setGeneratedPuzzles] = useState<LogicGridPuzzle[]>([]);
   const [isGenerating, setIsGenerating] = useState(false);
+  const [themePrompt, setThemePrompt] = useState('');
+  const [promptError, setPromptError] = useState<string | null>(null);
+  const [generationStatus, setGenerationStatus] = useState<string | null>(null);
 
   // Check if puzzle is solved whenever grid state changes
   useEffect(() => {
@@ -66,24 +70,46 @@ function App() {
   };
 
   const handleGenerateNewPuzzle = async () => {
+    setPromptError(null);
+    setGenerationStatus(null);
+
+    const trimmedPrompt = themePrompt.trim();
+
+    if (trimmedPrompt) {
+      const promptValidation = validateUserPrompt(trimmedPrompt);
+      if (!promptValidation.ok) {
+        setPromptError(promptValidation.reason ?? 'Invalid prompt');
+        return;
+      }
+    }
+
     setIsGenerating(true);
     try {
-      // Use setTimeout to allow UI to update with loading state
       await new Promise(resolve => setTimeout(resolve, 100));
+
+      let theme;
+      if (trimmedPrompt) {
+        setGenerationStatus('Creating theme with AI...');
+        const result = await generateThemeFromPrompt(trimmedPrompt);
+        theme = result.theme;
+        if (!result.fromAI) {
+          setGenerationStatus('AI unavailable — using a built-in theme instead');
+        }
+      }
 
       const newPuzzle = generatePuzzle('medium', {
         categoryCount: 3,
         itemCount: 5,
-        clueCount: 10
+        clueCount: 10,
+        ...(theme ? { theme } : {})
       });
 
-      // Add to generated puzzles list
-      setGeneratedPuzzles(prev => [...prev, newPuzzle]);
-
-      // Load the new puzzle
       setCurrentPuzzle(newPuzzle);
       setGridState(initializeGridState());
       setIsComplete(false);
+      if (trimmedPrompt && theme) {
+        setGenerationStatus(null);
+      }
     } catch (error) {
       console.error('Failed to generate puzzle:', error);
       alert('Failed to generate puzzle. Please try again.');
@@ -121,13 +147,31 @@ function App() {
                 Hard
               </button>
             </div>
+            <div className="theme-prompt">
+              <input
+                type="text"
+                className="theme-prompt-input"
+                placeholder="Theme idea, e.g. 'coffee shop regulars'..."
+                value={themePrompt}
+                onChange={e => { setThemePrompt(e.target.value); setPromptError(null); }}
+                disabled={isGenerating}
+                maxLength={200}
+              />
+              {promptError && <p className="theme-prompt-error">{promptError}</p>}
+              {generationStatus && <p className="theme-prompt-status">{generationStatus}</p>}
+            </div>
+
             <div className="action-buttons">
               <button
                 className="generate-button"
                 onClick={handleGenerateNewPuzzle}
                 disabled={isGenerating}
               >
-                {isGenerating ? 'Generating...' : 'Generate New Puzzle'}
+                {isGenerating
+                  ? 'Generating...'
+                  : themePrompt.trim()
+                    ? 'Generate from Prompt'
+                    : 'Generate New Puzzle'}
               </button>
               <button className="check-button" onClick={handleCheckSolution}>
                 Check Solution
@@ -141,6 +185,12 @@ function App() {
 
         <div className="game-layout">
           <div className="grid-area">
+            {isGenerating && themePrompt.trim() && (
+              <div className="grid-loading" aria-label="Generating puzzle">
+                <div className="spinner" />
+                <p className="grid-loading-text">{generationStatus ?? 'Creating puzzle…'}</p>
+              </div>
+            )}
             <PuzzleGrid
               categories={currentPuzzle.categories}
               gridState={gridState}

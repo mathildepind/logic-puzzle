@@ -2,6 +2,32 @@ import { describe, it, expect } from 'vitest';
 import { generateSolution, generatePuzzle, buildSolutionMap, queryMatch } from './puzzleGenerator';
 import { validatePuzzle } from './gridHelpers';
 import type { Category } from '../types/puzzle';
+import type { PuzzleTheme } from '../data/puzzleThemes';
+
+const AI_STYLE_THEME: PuzzleTheme = {
+  name: 'Space Explorers',
+  description: 'Match each astronaut with their mission and home planet.',
+  categories: [
+    {
+      name: 'Astronauts',
+      items: ['Yuri', 'Neil', 'Sally', 'Buzz', 'Mae', 'Valentina', 'Chris', 'Peggy'],
+      singularVerb: 'is',
+      pluralVerb: 'are'
+    },
+    {
+      name: 'Missions',
+      items: ['Apollo', 'Gemini', 'Mercury', 'Vostok', 'Shuttle', 'Soyuz', 'Artemis', 'Dragon'],
+      singularVerb: 'flew on',
+      pluralVerb: 'fly on'
+    },
+    {
+      name: 'Planets',
+      items: ['Mars', 'Venus', 'Jupiter', 'Saturn', 'Neptune', 'Uranus', 'Pluto', 'Europa'],
+      singularVerb: 'studies',
+      pluralVerb: 'study'
+    }
+  ]
+};
 
 describe('Puzzle Generator', () => {
   describe('generateSolution', () => {
@@ -132,6 +158,43 @@ describe('Puzzle Generator', () => {
       const sol1 = JSON.stringify(puzzle1.solution);
       const sol2 = JSON.stringify(puzzle2.solution);
       expect(sol1).not.toBe(sol2);
+    });
+
+    it('should use an injected theme instead of picking a random one', () => {
+      const puzzle = generatePuzzle('medium', {
+        categoryCount: 3,
+        itemCount: 5,
+        theme: AI_STYLE_THEME
+      });
+
+      expect(puzzle.title).toBe('Space Explorers');
+      expect(puzzle.categories[0].name).toBe('Astronauts');
+      expect(puzzle.categories[1].name).toBe('Missions');
+      expect(puzzle.categories[2].name).toBe('Planets');
+      expect(puzzle.categories[0].items.length).toBe(5);
+
+      const validation = validatePuzzle(puzzle);
+      expect(validation.isValid).toBe(true);
+    });
+
+    it('injected theme puzzle passes structural validation', () => {
+      const puzzle = generatePuzzle('medium', { theme: AI_STYLE_THEME, itemCount: 5 });
+      const validation = validatePuzzle(puzzle);
+      if (!validation.isValid) console.log('Errors:', validation.errors);
+      expect(validation.isValid).toBe(true);
+      expect(puzzle.solution.length).toBe(15); // 3 pairs × 5 items
+    });
+
+    it('injected theme clues reference the correct category verbs', () => {
+      const puzzle = generatePuzzle('medium', { theme: AI_STYLE_THEME, itemCount: 5 });
+      // Every clue should be a non-empty string
+      for (const clue of puzzle.clues) {
+        expect(typeof clue.text).toBe('string');
+        expect(clue.text.length).toBeGreaterThan(0);
+      }
+      // At least one clue should reference a theme verb (not the fallback 'has')
+      const hasFallback = puzzle.clues.every(c => c.text.includes(' has '));
+      expect(hasFallback).toBe(false);
     });
 
     it('should handle generation with different item counts', () => {
