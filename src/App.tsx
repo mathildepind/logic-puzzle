@@ -185,6 +185,12 @@ function App() {
 
         <div className="game-layout">
           <div className="grid-area">
+            {isGenerating && themePrompt.trim() && (
+              <div className="grid-loading" aria-label="Generating puzzle">
+                <div className="spinner" />
+                <p className="grid-loading-text">{generationStatus ?? 'Creating puzzle…'}</p>
+              </div>
+            )}
             <PuzzleGrid
               categories={currentPuzzle.categories}
               gridState={gridState}
